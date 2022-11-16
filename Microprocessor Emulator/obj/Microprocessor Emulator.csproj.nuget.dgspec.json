@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Magda\\source\\repos\\Microprocessor Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj": {}
+    "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\Microprocessor Emulator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Magda\\source\\repos\\Microprocessor Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj": {
+    "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\Microprocessor Emulator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Magda\\source\\repos\\Microprocessor Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
+        "projectUniqueName": "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
         "projectName": "Microprocessor Emulator",
-        "projectPath": "C:\\Users\\Magda\\source\\repos\\Microprocessor Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
-        "packagesPath": "C:\\Users\\Magda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Magda\\source\\repos\\Microprocessor Emulator\\Microprocessor Emulator\\obj\\",
+        "projectPath": "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
+        "packagesPath": "C:\\Users\\Tomek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Magda\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Tomek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

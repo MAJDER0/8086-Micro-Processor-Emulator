@@ -13,3 +13,18 @@ C:\Users\Magda\source\repos\Microprocessor Emulator\Microprocessor Emulator\obj\
 C:\Users\Magda\source\repos\Microprocessor Emulator\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.pdb
 C:\Users\Magda\source\repos\Microprocessor Emulator\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.genruntimeconfig.cache
 C:\Users\Magda\source\repos\Microprocessor Emulator\Microprocessor Emulator\obj\Debug\net6.0\ref\Microprocessor Emulator.dll
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\bin\Debug\net6.0\Microprocessor Emulator.exe
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\bin\Debug\net6.0\Microprocessor Emulator.deps.json
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\bin\Debug\net6.0\Microprocessor Emulator.runtimeconfig.json
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\bin\Debug\net6.0\Microprocessor Emulator.dll
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\bin\Debug\net6.0\Microprocessor Emulator.pdb
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.csproj.AssemblyReference.cache
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.AssemblyInfoInputs.cache
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.AssemblyInfo.cs
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.csproj.CoreCompileInputs.cache
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.dll
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\refint\Microprocessor Emulator.dll
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.pdb
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\Microprocessor Emulator.genruntimeconfig.cache
+C:\Users\Tomek\Source\Repos\Projekt\Microprocessor Emulator\obj\Debug\net6.0\ref\Microprocessor Emulator.dll
