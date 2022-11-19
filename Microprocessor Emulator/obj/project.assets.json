@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Tomek\\.nuget\\packages\\": {}
+    "C:\\Users\\Magda\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
+      "projectUniqueName": "C:\\Users\\Magda\\Source\\Repos\\Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
       "projectName": "Microprocessor Emulator",
-      "projectPath": "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
-      "packagesPath": "C:\\Users\\Tomek\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tomek\\Source\\Repos\\Projekt\\Microprocessor Emulator\\obj\\",
+      "projectPath": "C:\\Users\\Magda\\Source\\Repos\\Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
+      "packagesPath": "C:\\Users\\Magda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Magda\\Source\\Repos\\Emulator\\Microprocessor Emulator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tomek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Magda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -61,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

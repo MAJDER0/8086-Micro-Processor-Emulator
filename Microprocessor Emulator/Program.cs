@@ -8,7 +8,6 @@ namespace Microprocessor_Emualtor
     {
         static void Main(string[] args)
         {
-
             int selected;
             while (true) { 
 
