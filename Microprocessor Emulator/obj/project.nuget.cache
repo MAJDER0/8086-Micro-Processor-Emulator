@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Xib9YFHR8axpk/tU36yJm2NYGtw0FtLOPHLduIBrF/zdbrKYC30hgLbNuJi1CI2flkTcBzbbaf9zJdzIEDlyhA==",
+  "dgSpecHash": "o4182NyG1iR+jZi+5ZZs0PAYXNlAIeCdn81cvChwJwDrxcJ5cOfUWec60lwJJ7IbNbi9ZyQDn71C3b43iUrUyg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Magda\\Source\\Repos\\Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
+  "projectFilePath": "C:\\Users\\Tomek\\Source\\Repos\\8086-Micro-Processor-Emulator\\Microprocessor Emulator\\Microprocessor Emulator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -11,11 +11,17 @@ namespace Microprocessor_Emualtor
             int selected;
             while (true) { 
 
+                Console.Clear();
+                
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine($"AX: {Registries.AxValue} BX: {Registries.BxValue} DX: {Registries.DxValue}\n");
+                Console.ResetColor();
+
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Please select the instruction you want to execute:  \n");
                 Console.ResetColor();
               
-                Console.WriteLine("(1) SUB Instruction\n");
+                Console.WriteLine("(1) SET REGISTRY VALUES\n");
                 Console.WriteLine("(2) MOV Instruction\n");
                 Console.WriteLine("(3) NOP Instruction\n");
                 Console.WriteLine("(4) XOR Instruction\n");
@@ -26,8 +32,8 @@ namespace Microprocessor_Emualtor
                 
                     switch(selected)
                         {
-
                         case 2:
+                            Console.Clear();
                             MOVInstruction.MOV();
                         break;
 

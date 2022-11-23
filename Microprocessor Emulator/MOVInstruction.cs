@@ -14,12 +14,11 @@ namespace Microprocessor_Emulator
        
         public static void MOV()
         {
-            
-            int AxValue = 0, BxValue = 0, DxValue = 0;
-
             while (true)
             {
+                
                 Start:
+                Console.Clear();
 
                 int TriggerAction;
                 Console.WriteLine();
@@ -42,9 +41,10 @@ namespace Microprocessor_Emulator
 
                 if (TriggerAction == 1)
                 {
-                    Console.WriteLine($"AX Value: {AxValue}");
-                    Console.WriteLine($"BX Value: {BxValue}");
-                    Console.WriteLine($"DX Value: {DxValue}");
+                    Console.Clear();
+                    Console.WriteLine($"\nAX Value: {Registries.AxValue}");
+                    Console.WriteLine($"BX Value: {Registries.BxValue}");
+                    Console.WriteLine($"DX Value: {Registries.DxValue}");
                     Console.WriteLine();
 
                     Console.WriteLine("Press any key to come back\n");
@@ -56,14 +56,14 @@ namespace Microprocessor_Emulator
 
                 if (TriggerAction == 2)
                 {
-
+                    Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("Select registry you want to enter the value: \n");
                     Console.ResetColor();
                     Console.WriteLine("(1) AX");
                     Console.WriteLine("(2) BX");
                     Console.WriteLine("(3) DX\n");
-                    Console.WriteLine("(0) To return");
+                    Console.WriteLine("() Any key to return\n");
 
 
                     while (true)
@@ -77,6 +77,7 @@ namespace Microprocessor_Emulator
                         {
                             while (true)
                             {
+                                
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                 Console.WriteLine("You have choosen AX Registry, please enter value now: \n");
                                 Console.ResetColor();
@@ -87,7 +88,8 @@ namespace Microprocessor_Emulator
 
                                 if (Enumerable.Range(-32767, 65535).Contains(AxResult))
                                 {
-                                    AxValue = AxResult;
+                                    Console.Clear();
+                                    Registries.AxValue = AxResult;
 
                                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                     Console.WriteLine("Select registry you want to move that value in: \n");
@@ -109,8 +111,8 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
                                             Console.ResetColor();
 
-                                            BxValue = AxValue;
-                                            AxValue = 0;
+                                            Registries.BxValue = Registries.AxValue;
+                                            Registries.AxValue = 0;
 
                                             Console.WriteLine("Please wait. . .");
                                             System.Threading.Thread.Sleep(1000);
@@ -122,7 +124,7 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"BX value now: {BxValue}");
+                                            Console.WriteLine($"BX value now: {Registries.BxValue}");
                                             Console.ResetColor();
 
                                             Console.WriteLine("Press any key to come back");
@@ -138,8 +140,8 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
                                             Console.ResetColor();
 
-                                            DxValue = AxValue;
-                                            AxValue = 0;
+                                            Registries.DxValue = Registries.AxValue;
+                                            Registries.AxValue = 0;
 
 
                                             Console.WriteLine("Please wait. . .");
@@ -152,7 +154,7 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"DX value now: {DxValue}");
+                                            Console.WriteLine($"DX value now: {Registries.DxValue}");
                                             Console.ResetColor();
 
                                             Console.WriteLine("Press any key to come back");
@@ -203,7 +205,8 @@ namespace Microprocessor_Emulator
 
                                 if (Enumerable.Range(-32767, 65535).Contains(BxResult))
                                 {
-                                    BxValue = BxResult;
+                                    Console.Clear();
+                                    Registries.BxValue = BxResult;
 
                                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                     Console.WriteLine("Select registry you want to move that value in: \n");
@@ -226,8 +229,8 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
                                             Console.ResetColor();
 
-                                            AxValue = BxValue;
-                                            BxValue = 0;
+                                            Registries.AxValue = Registries.BxValue;
+                                            Registries.BxValue = 0;
 
                                             Console.WriteLine("Please wait. . .");
                                             System.Threading.Thread.Sleep(1000);
@@ -239,7 +242,7 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"AX value now: {AxValue}");
+                                            Console.WriteLine($"AX value now: {Registries.AxValue}");
                                             Console.ResetColor();
 
                                             Console.WriteLine("Press any key to come back");
@@ -255,8 +258,8 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
                                             Console.ResetColor();
 
-                                            DxValue = BxValue;
-                                            BxValue = 0;
+                                            Registries.DxValue = Registries.BxValue;
+                                            Registries.BxValue = 0;
 
                                             Console.WriteLine("Please wait. . .");
                                             System.Threading.Thread.Sleep(1000);
@@ -268,7 +271,7 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"DX value now: {DxValue}");
+                                            Console.WriteLine($"DX value now: {Registries.DxValue}");
                                             Console.ResetColor();
 
                                             Console.WriteLine("Press any key to come back");
@@ -317,8 +320,8 @@ namespace Microprocessor_Emulator
 
                                 if (Enumerable.Range(-32767, 65535).Contains(DxResult)) 
                                 {
-  
-                                    DxValue = DxResult;
+                                    Console.Clear();
+                                    Registries.DxValue = DxResult;
 
                                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                     Console.WriteLine("Select registry you want to move that value in: \n");
@@ -338,8 +341,8 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
                                             Console.ResetColor();
 
-                                            AxValue = DxValue;
-                                            DxValue = 0;
+                                            Registries.AxValue = Registries.DxValue;
+                                            Registries.DxValue = 0;
 
                                             Console.WriteLine("Please wait. . .");
                                             System.Threading.Thread.Sleep(1000);
@@ -351,7 +354,7 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"AX value now: {AxValue}");
+                                            Console.WriteLine($"AX value now: {Registries.AxValue}");
                                             Console.ResetColor();
 
                                             Console.WriteLine("Press any key to come back");
@@ -367,8 +370,8 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
                                             Console.ResetColor();
 
-                                            BxValue = DxValue;
-                                            DxValue = 0;
+                                            Registries.BxValue = Registries.DxValue;
+                                            Registries.DxValue = 0;
 
                                             Console.WriteLine("Please wait. . .");
                                             System.Threading.Thread.Sleep(1000);
@@ -380,7 +383,7 @@ namespace Microprocessor_Emulator
                                             Console.WriteLine();
 
                                             Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"BX value now: {BxValue}");
+                                            Console.WriteLine($"BX value now: {Registries.BxValue}");
                                             Console.ResetColor();
 
                                             Console.WriteLine("Press any key to come back");
