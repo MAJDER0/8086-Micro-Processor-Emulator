@@ -11,13 +11,13 @@ namespace Microprocessor_Emulator
 {
     public static class MOVInstruction
     {
-       
+
         public static void MOV()
         {
             while (true)
             {
-                
-                Start:
+
+            Start:
                 Console.Clear();
 
                 int TriggerAction;
@@ -26,8 +26,8 @@ namespace Microprocessor_Emulator
                 Console.WriteLine("Select one: \n");
                 Console.ResetColor();
 
-                Console.WriteLine("(1) Show current registries value\n");
-                Console.WriteLine("(2) Enter value to choosen registry\n");
+                Console.WriteLine("(1) Move registry value to choosen registry\n");
+                Console.WriteLine("(2) Show current registries value\n");
                 Console.WriteLine("() Press any other key to return menu\n");
 
                 int.TryParse(Console.ReadLine(), out TriggerAction);
@@ -39,7 +39,7 @@ namespace Microprocessor_Emulator
 
                 }
 
-                if (TriggerAction == 1)
+                if (TriggerAction == 2)
                 {
                     Console.Clear();
                     Console.WriteLine($"\nAX Value: {Registries.AxValue}");
@@ -54,15 +54,16 @@ namespace Microprocessor_Emulator
                 }
 
 
-                if (TriggerAction == 2)
+                if (TriggerAction == 1)
                 {
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine("Select registry you want to enter the value: \n");
+                    Console.WriteLine("Select registry you want to move value from: \n");
                     Console.ResetColor();
                     Console.WriteLine("(1) AX");
                     Console.WriteLine("(2) BX");
-                    Console.WriteLine("(3) DX\n");
+                    Console.WriteLine("(3) CX");
+                    Console.WriteLine("(4) DX");
                     Console.WriteLine("() Any key to return\n");
 
 
@@ -72,116 +73,143 @@ namespace Microprocessor_Emulator
                         int ChoosenRegistry;
                         int.TryParse(Console.ReadLine(), out ChoosenRegistry);
                         Console.WriteLine();
+                        Console.Clear();
 
                         if (ChoosenRegistry == 1)
                         {
                             while (true)
                             {
-                                
+
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, please enter value now: \n");
+                                Console.WriteLine("\nYou have choosen AX Registry.");
                                 Console.ResetColor();
 
-                                int AxResult;
-                                int.TryParse(Console.ReadLine(), out AxResult);
-                                Console.WriteLine();
 
-                                if (Enumerable.Range(-32767, 65535).Contains(AxResult))
-                                {
-                                    Console.Clear();
-                                    Registries.AxValue = AxResult;
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("Choose registry you want to move that value in: \n");
+                                Console.ResetColor();
+                                Console.WriteLine("(1) BX");
+                                Console.WriteLine("(2) CX");
+                                Console.WriteLine("(3) DX\n");
 
-                                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                    Console.WriteLine("Select registry you want to move that value in: \n");
-                                    Console.ResetColor();
-                                    Console.WriteLine("(1) BX");
-                                    Console.WriteLine("(2) DX\n");
+                                while (true)
+                                { 
+                                    try { 
 
-                                    while (true)
-                                    {
-
-                                        int SelectedRegistryToMove;
-                                        int.TryParse(Console.ReadLine(), out SelectedRegistryToMove);
+                                        int SelectedRegistryToMove = int.Parse(Console.ReadLine());
                                         Console.WriteLine();
 
-                                        if (SelectedRegistryToMove == 1)
-
+                                        try
                                         {
-                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                            Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
-                                            Console.ResetColor();
 
-                                            Registries.BxValue = Registries.AxValue;
-                                            Registries.AxValue = 0;
+                                            if (SelectedRegistryToMove == 1)
 
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
 
-                                            Console.WriteLine();
+                                                Registries.BxValue = Registries.AxValue;
+                                                Registries.AxValue = 0;
 
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"BX value now: {Registries.BxValue}");
-                                            Console.ResetColor();
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
 
-                                            Console.WriteLine("Press any key to come back");
-                                            Console.ReadLine();
-                                            goto Start;
-                                            
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
 
+                                            }
+
+                                             if (SelectedRegistryToMove == 2)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen CX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.CxValue = Registries.AxValue;
+                                                Registries.AxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+
+                                            if (SelectedRegistryToMove == 3)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.DxValue = Registries.AxValue;
+                                                Registries.AxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                                Console.WriteLine("Please choosen correct registry!");
+                                                Console.ResetColor();
+                                                continue;
+
+                                            }
                                         }
-
-                                        if (SelectedRegistryToMove == 2)
-                                        {
-                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                            Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
-                                            Console.ResetColor();
-
-                                            Registries.DxValue = Registries.AxValue;
-                                            Registries.AxValue = 0;
-
-
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-
-                                            Console.WriteLine();
-
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"DX value now: {Registries.DxValue}");
-                                            Console.ResetColor();
-
-                                            Console.WriteLine("Press any key to come back");
-                                            Console.ReadLine();
-                                            goto Start;
-                                        }
-
-                                        else
+                                        catch 
                                         {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                                            Console.WriteLine("Please choose correct registry to copy");
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
                                             Console.ResetColor();
+                                            Console.ReadLine();
                                             continue;
                                         }
-
                                     }
-                                    break;
+
+                                    catch 
+                                    {
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                            Console.ResetColor();
+                                            Console.ReadLine();
+                                            continue;
+                                    }
                                 }
 
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("Your number has exceeded 16 bits or you haven't entered any value, please enter correct number");
-                                    Console.ResetColor();
-                                    continue;
-                                }                            
-                              
                             }
 
                         }
@@ -194,114 +222,139 @@ namespace Microprocessor_Emulator
                         {
                             while (true)
                             {
+
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, please enter value now: \n");
+                                Console.WriteLine("\nYou have choosen BX Registry.");
                                 Console.ResetColor();
 
-                                int BxResult;
-                                int.TryParse(Console.ReadLine(), out BxResult);
-                                Console.WriteLine();
 
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("Choose registry you want to move that value in: \n");
+                                Console.ResetColor();
+                                Console.WriteLine("(1) AX");
+                                Console.WriteLine("(2) CX");
+                                Console.WriteLine("(3) DX\n");
 
-                                if (Enumerable.Range(-32767, 65535).Contains(BxResult))
+                                while (true)
                                 {
-                                    Console.Clear();
-                                    Registries.BxValue = BxResult;
-
-                                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                    Console.WriteLine("Select registry you want to move that value in: \n");
-                                    Console.ResetColor();
-                                    Console.WriteLine("(1) AX");
-                                    Console.WriteLine("(2) DX");
-
-                                    Console.WriteLine();
-                                    while (true)
-                                    {
-
-                                        int SelectedRegistryToMove;
-                                        int.TryParse(Console.ReadLine(), out SelectedRegistryToMove);
+                                    try { 
+                                        int SelectedRegistryToMove = int.Parse(Console.ReadLine());
                                         Console.WriteLine();
 
-                                        if (SelectedRegistryToMove == 1)
-
+                                        try
                                         {
-                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                            Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
-                                            Console.ResetColor();
 
-                                            Registries.AxValue = Registries.BxValue;
-                                            Registries.BxValue = 0;
+                                            if (SelectedRegistryToMove == 1)
 
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
 
-                                            Console.WriteLine();
+                                                Registries.AxValue = Registries.BxValue;
+                                                Registries.BxValue = 0;
 
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"AX value now: {Registries.AxValue}");
-                                            Console.ResetColor();
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
 
-                                            Console.WriteLine("Press any key to come back");
-                                            Console.ReadKey();
-                                            goto Start;
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
 
+                                            }
+
+                                            if (SelectedRegistryToMove == 2)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen CX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.CxValue = Registries.BxValue;
+                                                Registries.BxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+
+
+                                            if (SelectedRegistryToMove == 3)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.DxValue = Registries.BxValue;
+                                                Registries.BxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                                Console.WriteLine("Please choosen correct registry!");
+                                                Console.ResetColor();
+                                                continue;
+
+                                            }
                                         }
-
-                                        if (SelectedRegistryToMove == 2)
-
-                                        {
-                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                            Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
-                                            Console.ResetColor();
-
-                                            Registries.DxValue = Registries.BxValue;
-                                            Registries.BxValue = 0;
-
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-
-                                            Console.WriteLine();
-
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"DX value now: {Registries.DxValue}");
-                                            Console.ResetColor();
-
-                                            Console.WriteLine("Press any key to come back");
-                                            Console.ReadKey();
-                                            goto Start;
-
-                                        }
-
-                                        else
+                                        catch
                                         {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                                            Console.WriteLine("Please choose correct registry to copy");
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
                                             Console.ResetColor();
+                                            Console.ReadLine();
                                             continue;
                                         }
                                     }
 
-                                    break;
-
+                                    catch 
+                                    {
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                            Console.ResetColor();
+                                            Console.ReadLine();
+                                            continue;
+                                    }
                                 }
-                                else
-                                {
 
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("Your number has exceeded 16 bits or you haven't entered any value, please enter correct number");
-                                    Console.ResetColor();
-                                    continue;
-
-                                }
                             }
+
                         }
 
 
@@ -309,116 +362,289 @@ namespace Microprocessor_Emulator
 
                         if (ChoosenRegistry == 3)
                         {
-                            while (true) { 
+                            while (true)
+                            {
+
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, please enter value now: \n");
+                                Console.WriteLine("\nYou have choosen CX Registry.");
                                 Console.ResetColor();
 
-                                int DxResult;
-                                int.TryParse(Console.ReadLine(), out DxResult);
-                                Console.WriteLine();
 
-                                if (Enumerable.Range(-32767, 65535).Contains(DxResult)) 
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("Choose registry you want to move that value in: \n");
+                                Console.ResetColor();
+                                Console.WriteLine("(1) AX");
+                                Console.WriteLine("(2) BX");
+                                Console.WriteLine("(3) DX\n");
+
+                                while (true)
                                 {
-                                    Console.Clear();
-                                    Registries.DxValue = DxResult;
+                                    try { 
+                                        int SelectedRegistryToMove = int.Parse(Console.ReadLine());
+                                        Console.WriteLine();
 
-                                    Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                    Console.WriteLine("Select registry you want to move that value in: \n");
-                                    Console.ResetColor();
-                                    Console.WriteLine("(1) AX");
-                                    Console.WriteLine("(2) BX\n");
-
-                                    while (true)
-                                    {
-                                        int SelectedRegistryToMove;
-                                        int.TryParse(Console.ReadLine(), out SelectedRegistryToMove);
-
-                                        if (SelectedRegistryToMove == 1)
-
+                                        try
                                         {
-                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                            Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
-                                            Console.ResetColor();
 
-                                            Registries.AxValue = Registries.DxValue;
-                                            Registries.DxValue = 0;
+                                            if (SelectedRegistryToMove == 1)
 
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
 
-                                            Console.WriteLine();
+                                                Registries.AxValue = Registries.CxValue;
+                                                Registries.CxValue = 0;
 
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"AX value now: {Registries.AxValue}");
-                                            Console.ResetColor();
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
 
-                                            Console.WriteLine("Press any key to come back");
-                                            Console.ReadKey();
-                                            goto Start;
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
 
+                                            }
+
+                                        
+                                            if (SelectedRegistryToMove == 2)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.BxValue = Registries.CxValue;
+                                                Registries.CxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+                                            if (SelectedRegistryToMove == 3)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen DX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.DxValue = Registries.CxValue;
+                                                Registries.CxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                                Console.WriteLine("Please choosen correct registry!");
+                                                Console.ResetColor();
+                                                continue;
+
+                                            }
                                         }
-
-                                        if (SelectedRegistryToMove == 2)
-
-                                        {
-                                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                            Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
-                                            Console.ResetColor();
-
-                                            Registries.BxValue = Registries.DxValue;
-                                            Registries.DxValue = 0;
-
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-                                            Console.WriteLine("Please wait. . .");
-                                            System.Threading.Thread.Sleep(1000);
-
-                                            Console.WriteLine();
-
-                                            Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                            Console.WriteLine($"BX value now: {Registries.BxValue}");
-                                            Console.ResetColor();
-
-                                            Console.WriteLine("Press any key to come back");
-                                            Console.ReadKey();
-                                            goto Start;
-
-                                        }
-
-                                        else
+                                        catch
                                         {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
-                                            Console.WriteLine("Please choose correct registry to copy");
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
                                             Console.ResetColor();
+                                            Console.ReadLine();
                                             continue;
                                         }
 
                                     }
 
-                                    break;
-                                }
-
-                                else
-                                {
-
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("Your number has exceeded 16 bits or you haven't entered any value, please enter correct number");
-                                    Console.ResetColor();
-                                    continue;
-
+                                    catch 
+                                    {
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                            Console.ResetColor();
+                                            Console.ReadLine();
+                                            continue;
+                                    }
                                 }
 
                             }
+
                         }
 
-                        if (ChoosenRegistry == 0) { break;}
+
+
+
+
+
+                        if (ChoosenRegistry == 4)
+                        {
+                            while (true)
+                            {
+
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("\nYou have choosen DX Registry.");
+                                Console.ResetColor();
+
+
+                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                Console.WriteLine("Choose registry you want to move that value in: \n");
+                                Console.ResetColor();
+                                Console.WriteLine("(1) AX");
+                                Console.WriteLine("(2) BX");
+                                Console.WriteLine("(3) CX\n");
+
+                                while (true)
+                                {
+                                    try { 
+                                     int SelectedRegistryToMove = int.Parse(Console.ReadLine());
+                                     Console.WriteLine();
+
+                                        try
+                                        {
+
+                                            if (SelectedRegistryToMove == 1)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen AX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.AxValue = Registries.DxValue;
+                                                Registries.DxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+                                            if (SelectedRegistryToMove == 2)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen BX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.BxValue = Registries.DxValue;
+                                                Registries.DxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+                                            if (SelectedRegistryToMove == 3)
+
+                                            {
+                                                Console.Clear();
+                                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                                                Console.WriteLine("You have choosen CX registry, moving process is about to begin: \n");
+                                                Console.ResetColor();
+
+                                                Registries.CxValue = Registries.DxValue;
+                                                Registries.DxValue = 0;
+
+                                                Console.WriteLine("\nPlease wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+                                                Console.WriteLine("Please wait. . .");
+                                                System.Threading.Thread.Sleep(1000);
+
+                                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                                Console.WriteLine("\nSuccess! Press any key to return");
+                                                Console.ResetColor();
+                                                Console.ReadLine();
+                                                goto Start;
+
+                                            }
+
+
+
+
+                                            else
+                                            {
+                                                Console.ForegroundColor = ConsoleColor.DarkRed;
+                                                Console.WriteLine("Please choosen correct registry!");
+                                                Console.ResetColor();
+                                                continue;
+
+                                            }
+                                        }
+                                        catch
+                                        {
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                            Console.ResetColor();
+                                            Console.ReadLine();
+                                            continue;
+                                        }
+                                    }
+
+                                    catch 
+                                    {
+                                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                                            Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                            Console.ResetColor();
+                                            Console.ReadLine();
+                                            continue;
+                                    }
+
+                                }
+                            }
+
+                        }
+
+                        if (ChoosenRegistry == 0) { break; }
 
                         else
                         {
@@ -427,7 +653,7 @@ namespace Microprocessor_Emulator
                             Console.ResetColor();
                             continue;
                         }
-                       
+
                     }
                     continue;
                 }

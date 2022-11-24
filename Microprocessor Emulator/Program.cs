@@ -14,7 +14,7 @@ namespace Microprocessor_Emualtor
                 Console.Clear();
                 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"AX: {Registries.AxValue} BX: {Registries.BxValue} DX: {Registries.DxValue}\n");
+                Console.WriteLine($"AX: {Registries.AxValue} BX: {Registries.BxValue} CX: {Registries.CxValue} DX: {Registries.DxValue}\n");
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -32,6 +32,11 @@ namespace Microprocessor_Emualtor
                 
                     switch(selected)
                         {
+
+                        case 1:
+                            Console.Clear();
+                            SET.SETValues();
+                            break;
                         case 2:
                             Console.Clear();
                             MOVInstruction.MOV();

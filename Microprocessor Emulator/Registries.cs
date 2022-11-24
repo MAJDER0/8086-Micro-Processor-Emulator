@@ -11,6 +11,7 @@ namespace Microprocessor_Emulator
         public static int AxValue { get; set; }
         public static int BxValue { get; set; }
         public static int DxValue { get; set; }
+        public static int CxValue { get; set; }
 
     }
 }
