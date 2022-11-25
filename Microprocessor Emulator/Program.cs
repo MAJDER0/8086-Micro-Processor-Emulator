@@ -4,9 +4,9 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Microprocessor_Emualtor
 {
-    internal class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
             int selected;
             while (true) { 
@@ -23,7 +23,7 @@ namespace Microprocessor_Emualtor
               
                 Console.WriteLine("(1) SET REGISTRY VALUES\n");
                 Console.WriteLine("(2) MOV Instruction\n");
-                Console.WriteLine("(3) NOP Instruction\n");
+                Console.WriteLine("(3) ADD Instruction\n");
                 Console.WriteLine("(4) XOR Instruction\n");
 
                 while (true) { 

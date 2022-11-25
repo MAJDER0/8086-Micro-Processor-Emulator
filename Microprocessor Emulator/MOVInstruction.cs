@@ -124,7 +124,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -150,7 +150,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -177,7 +177,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -266,7 +266,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -292,7 +292,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -320,7 +320,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -408,7 +408,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -435,7 +435,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -461,7 +461,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -552,7 +552,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -578,7 +578,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
@@ -604,7 +604,7 @@ namespace Microprocessor_Emulator
                                                 Console.WriteLine("\nSuccess! Press any key to return");
                                                 Console.ResetColor();
                                                 Console.ReadLine();
-                                                goto Start;
+                                                Program.Main();
 
                                             }
 
