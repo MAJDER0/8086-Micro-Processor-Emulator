@@ -37,10 +37,16 @@ namespace Microprocessor_Emualtor
                             Console.Clear();
                             SET.SETValues();
                             break;
+
                         case 2:
                             Console.Clear();
                             MOVInstruction.MOV();
                         break;
+
+                        case 3:
+                            Console.Clear();
+                            ADDInstruction.ADD();
+                            break;
 
                         default:
                         Console.ForegroundColor = ConsoleColor.DarkRed;

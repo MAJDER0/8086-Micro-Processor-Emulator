@@ -17,7 +17,7 @@ namespace Microprocessor_Emulator
             while (true)
             {
 
-            Start:
+            
                 Console.Clear();
 
                 int TriggerAction;
@@ -45,6 +45,7 @@ namespace Microprocessor_Emulator
                     Console.WriteLine($"\nAX Value: {Registries.AxValue}");
                     Console.WriteLine($"BX Value: {Registries.BxValue}");
                     Console.WriteLine($"DX Value: {Registries.DxValue}");
+                    Console.WriteLine($"CX Value: {Registries.CxValue}");
                     Console.WriteLine();
 
                     Console.WriteLine("Press any key to come back\n");
