@@ -94,11 +94,11 @@ namespace Microprocessor_Emulator
                                 Console.WriteLine("(3) DX\n");
 
                                 while (true)
-                                { 
-                                    try { 
+                                {
+                                    bool isNumber = int.TryParse(Console.ReadLine(), out int SelectedRegistryToMove);
+                                    Console.WriteLine();
 
-                                        int SelectedRegistryToMove = int.Parse(Console.ReadLine());
-                                        Console.WriteLine();
+                                    if (isNumber) { 
 
                                         try
                                         {
@@ -201,7 +201,7 @@ namespace Microprocessor_Emulator
                                         }
                                     }
 
-                                    catch 
+                                    else 
                                     {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
                                             Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
@@ -238,9 +238,10 @@ namespace Microprocessor_Emulator
 
                                 while (true)
                                 {
-                                    try { 
-                                        int SelectedRegistryToMove = int.Parse(Console.ReadLine());
-                                        Console.WriteLine();
+                                    bool isNumber = int.TryParse(Console.ReadLine(), out int SelectedRegistryToMove);
+                                    Console.WriteLine();
+
+                                    if (isNumber) { 
 
                                         try
                                         {
@@ -344,7 +345,7 @@ namespace Microprocessor_Emulator
                                         }
                                     }
 
-                                    catch 
+                                    else 
                                     {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
                                             Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
@@ -380,9 +381,9 @@ namespace Microprocessor_Emulator
 
                                 while (true)
                                 {
-                                    try { 
-                                        int SelectedRegistryToMove = int.Parse(Console.ReadLine());
-                                        Console.WriteLine();
+                                    bool isNumber = int.TryParse(Console.ReadLine(), out int SelectedRegistryToMove);
+                                    Console.WriteLine();
+                                    if(isNumber) { 
 
                                         try
                                         {
@@ -486,7 +487,7 @@ namespace Microprocessor_Emulator
 
                                     }
 
-                                    catch 
+                                    else 
                                     {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
                                             Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
@@ -524,9 +525,10 @@ namespace Microprocessor_Emulator
 
                                 while (true)
                                 {
-                                    try { 
-                                     int SelectedRegistryToMove = int.Parse(Console.ReadLine());
-                                     Console.WriteLine();
+                                    bool isNumber = int.TryParse(Console.ReadLine(),out int SelectedRegistryToMove);
+                                    Console.WriteLine();
+
+                                    if(isNumber) { 
 
                                         try
                                         {
@@ -631,7 +633,7 @@ namespace Microprocessor_Emulator
                                         }
                                     }
 
-                                    catch 
+                                    else 
                                     {
                                             Console.ForegroundColor = ConsoleColor.DarkRed;
                                             Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");

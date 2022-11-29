@@ -38,9 +38,11 @@ namespace Microprocessor_Emulator
                             Console.WriteLine("\nYou have choosen AX Registry, please enter value now: \n");
                             Console.ResetColor();
 
-                            try
+                            string AxResultstr = Console.ReadLine();
+                            bool isNumber = int.TryParse(AxResultstr, out int AxResult);
+
+                            if (isNumber)
                             {
-                                int AxResult = int.Parse(Console.ReadLine());
 
                                 if (Enumerable.Range(-32767, 65535).Contains(AxResult))
                                 {
@@ -72,14 +74,24 @@ namespace Microprocessor_Emulator
                                 }
                             }
 
-                            catch
+                            else
                             {
+                                string result = AxResultstr;
 
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                Registries.AxValueStr = AxResultstr;
+
+                                Console.WriteLine("\nPlease wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine("\nSuccess! Press any key to return");
                                 Console.ResetColor();
                                 Console.ReadLine();
-                                continue;
+                                break;
 
                             }
                           
@@ -98,9 +110,11 @@ namespace Microprocessor_Emulator
                             Console.WriteLine("\nYou have choosen BX Registry, please enter value now: \n");
                             Console.ResetColor();
 
-                            try
+                            string BxResultstr = Console.ReadLine();
+                            bool isNumber = int.TryParse(BxResultstr, out int BxResult);
+
+                            if(isNumber)
                             {
-                                int BxResult = int.Parse(Console.ReadLine());
 
                                 if (Enumerable.Range(-32767, 65535).Contains(BxResult))
                                 {
@@ -132,14 +146,25 @@ namespace Microprocessor_Emulator
                                 }
                             }
 
-                            catch
+                            else
                             {
 
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                string result = BxResultstr;
+
+                                Registries.BxValueStr = BxResultstr;
+
+                                Console.WriteLine("\nPlease wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine("\nSuccess! Press any key to return");
                                 Console.ResetColor();
                                 Console.ReadLine();
-                                continue;
+                                break;
 
                             }
                         }
@@ -159,9 +184,11 @@ namespace Microprocessor_Emulator
                             Console.WriteLine("\nYou have choosen CX Registry, please enter value now: \n");
                             Console.ResetColor();
 
-                            try
+                            string CxResultstr = Console.ReadLine();
+                            bool isNumber = int.TryParse(CxResultstr, out int CxResult);
+
+                            if(isNumber)
                             {
-                                int CxResult = int.Parse(Console.ReadLine());
 
                                 if (Enumerable.Range(-32767, 65535).Contains(CxResult))
                                 {
@@ -193,14 +220,25 @@ namespace Microprocessor_Emulator
                                 }
                             }
 
-                            catch
+                            else
                             {
 
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                string result = CxResultstr;
+
+                                Registries.CxValueStr = CxResultstr;
+
+                                Console.WriteLine("\nPlease wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine("\nSuccess! Press any key to return");
                                 Console.ResetColor();
                                 Console.ReadLine();
-                                continue;
+                                break;
 
                             }
                         }
@@ -223,9 +261,11 @@ namespace Microprocessor_Emulator
                             Console.WriteLine("\nYou have choosen DX Registry, please enter value now: \n");
                             Console.ResetColor();
 
-                            try
+                            string DxResultstr = Console.ReadLine();
+                            bool isNumber = int.TryParse(DxResultstr, out int DxResult);
+
+                            if(isNumber)
                             {
-                                int DxResult = int.Parse(Console.ReadLine());
 
                                 if (Enumerable.Range(-32767, 65535).Contains(DxResult))
                                 {
@@ -257,14 +297,25 @@ namespace Microprocessor_Emulator
                                 }
                             }
 
-                            catch
+                            else
                             {
 
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("An error has occured. Overflow or null has been entered. Please introduce correct number. Press Any key to try again!");
+                                string result = DxResultstr;
+
+                                Registries.DxValueStr = DxResultstr;
+
+                                Console.WriteLine("\nPlease wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+                                Console.WriteLine("Please wait. . .");
+                                System.Threading.Thread.Sleep(1000);
+
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine("\nSuccess! Press any key to return");
                                 Console.ResetColor();
                                 Console.ReadLine();
-                                continue;
+                                break;
 
                             }
                         }

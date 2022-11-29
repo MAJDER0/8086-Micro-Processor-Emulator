@@ -14,7 +14,10 @@ namespace Microprocessor_Emualtor
                 Console.Clear();
                 
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"AX: {Registries.AxValue} BX: {Registries.BxValue} CX: {Registries.CxValue} DX: {Registries.DxValue}\n");
+                Console.WriteLine($"AX: {Registries.AxValue} || AX STRING: {Registries.AxValueStr}\n" +
+                    $"BX: {Registries.BxValue} || BX STRING: {Registries.BxValueStr}\n" +
+                    $"CX: {Registries.CxValue} || CX STRING: {Registries.CxValueStr}\n" +
+                    $"DX: {Registries.DxValue} || DX STRING: {Registries.DxValueStr}\n");
                 Console.ResetColor();
 
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
