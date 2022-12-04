@@ -8,29 +8,13 @@ namespace Microprocessor_Emualtor
     {
         public static void Main()
         {
-            int selected;
-            while (true) { 
+            while (true) {
 
-                Console.Clear();
-                
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine($"AX: {Registries.AxValue} || AX STRING: {Registries.AxValueStr}\n" +
-                    $"BX: {Registries.BxValue} || BX STRING: {Registries.BxValueStr}\n" +
-                    $"CX: {Registries.CxValue} || CX STRING: {Registries.CxValueStr}\n" +
-                    $"DX: {Registries.DxValue} || DX STRING: {Registries.DxValueStr}\n");
-                Console.ResetColor();
+                DashBoard.Board();
 
-                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                Console.WriteLine("Please select the instruction you want to execute:  \n");
-                Console.ResetColor();
-              
-                Console.WriteLine("(1) SET REGISTRY VALUES\n");
-                Console.WriteLine("(2) MOV Instruction\n");
-                Console.WriteLine("(3) ADD Instruction\n");
-                Console.WriteLine("(4) XOR Instruction\n");
+                while (true) {
 
-                while (true) { 
-                
+                    int selected;
                     int.TryParse(Console.ReadLine(), out selected);
                 
                     switch(selected)
@@ -56,9 +40,7 @@ namespace Microprocessor_Emualtor
                         Console.WriteLine("Please choose correct instruction!");
                         Console.ResetColor();
                         continue;
-
-                    }
-                      
+                    }                
                     break;                   
                 }
             }

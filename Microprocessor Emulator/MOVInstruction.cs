@@ -27,33 +27,10 @@ namespace Microprocessor_Emulator
                 Console.ResetColor();
 
                 Console.WriteLine("(1) Move registry value to choosen registry\n");
-                Console.WriteLine("(2) Show current registries value\n");
                 Console.WriteLine("() Press any other key to return menu\n");
 
                 int.TryParse(Console.ReadLine(), out TriggerAction);
                 Console.WriteLine();
-
-                if (TriggerAction == 0)
-                {
-                    break;
-
-                }
-
-                if (TriggerAction == 2)
-                {
-                    Console.Clear();
-                    Console.WriteLine($"\nAX Value: {Registries.AxValue}");
-                    Console.WriteLine($"BX Value: {Registries.BxValue}");
-                    Console.WriteLine($"DX Value: {Registries.DxValue}");
-                    Console.WriteLine($"CX Value: {Registries.CxValue}");
-                    Console.WriteLine();
-
-                    Console.WriteLine("Press any key to come back\n");
-                    Console.ReadLine();
-                    continue;
-
-                }
-
 
                 if (TriggerAction == 1)
                 {
@@ -61,10 +38,10 @@ namespace Microprocessor_Emulator
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("Select registry you want to move value from: \n");
                     Console.ResetColor();
-                    Console.WriteLine("(1) AX");
-                    Console.WriteLine("(2) BX");
-                    Console.WriteLine("(3) CX");
-                    Console.WriteLine("(4) DX");
+                    Console.WriteLine("(1) AX\n");
+                    Console.WriteLine("(2) BX\n");
+                    Console.WriteLine("(3) CX\n");
+                    Console.WriteLine("(4) DX\n");
                     Console.WriteLine("() Any key to return\n");
 
 
@@ -89,8 +66,8 @@ namespace Microprocessor_Emulator
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                 Console.WriteLine("Choose registry you want to move that value in: \n");
                                 Console.ResetColor();
-                                Console.WriteLine("(1) BX");
-                                Console.WriteLine("(2) CX");
+                                Console.WriteLine("(1) BX\n");
+                                Console.WriteLine("(2) CX\n");
                                 Console.WriteLine("(3) DX\n");
 
                                 while (true)
@@ -112,7 +89,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.BxValue = Registries.AxValue;
-                                                Registries.AxValue = 0;
+                                                Registries.AxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -138,7 +115,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.CxValue = Registries.AxValue;
-                                                Registries.AxValue = 0;
+                                                Registries.AxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -165,7 +142,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.DxValue = Registries.AxValue;
-                                                Registries.AxValue = 0;
+                                                Registries.AxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -215,10 +192,6 @@ namespace Microprocessor_Emulator
 
                         }
 
-
-
-
-
                         if (ChoosenRegistry == 2)
                         {
                             while (true)
@@ -232,8 +205,8 @@ namespace Microprocessor_Emulator
                                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
                                 Console.WriteLine("Choose registry you want to move that value in: \n");
                                 Console.ResetColor();
-                                Console.WriteLine("(1) AX");
-                                Console.WriteLine("(2) CX");
+                                Console.WriteLine("(1) AX\n");
+                                Console.WriteLine("(2) CX\n");
                                 Console.WriteLine("(3) DX\n");
 
                                 while (true)
@@ -255,7 +228,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.AxValue = Registries.BxValue;
-                                                Registries.BxValue = 0;
+                                                Registries.BxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -281,7 +254,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.CxValue = Registries.BxValue;
-                                                Registries.BxValue = 0;
+                                                Registries.BxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -309,7 +282,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.DxValue = Registries.BxValue;
-                                                Registries.BxValue = 0;
+                                                Registries.BxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -397,7 +370,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.AxValue = Registries.CxValue;
-                                                Registries.CxValue = 0;
+                                                Registries.CxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -424,7 +397,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.BxValue = Registries.CxValue;
-                                                Registries.CxValue = 0;
+                                                Registries.CxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -450,7 +423,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.DxValue = Registries.CxValue;
-                                                Registries.CxValue = 0;
+                                                Registries.CxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -502,10 +475,6 @@ namespace Microprocessor_Emulator
                         }
 
 
-
-
-
-
                         if (ChoosenRegistry == 4)
                         {
                             while (true)
@@ -542,7 +511,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.AxValue = Registries.DxValue;
-                                                Registries.DxValue = 0;
+                                                Registries.DxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -568,7 +537,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.BxValue = Registries.DxValue;
-                                                Registries.DxValue = 0;
+                                                Registries.DxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);
@@ -594,7 +563,7 @@ namespace Microprocessor_Emulator
                                                 Console.ResetColor();
 
                                                 Registries.CxValue = Registries.DxValue;
-                                                Registries.DxValue = 0;
+                                                Registries.DxValue = 0.ToString();
 
                                                 Console.WriteLine("\nPlease wait. . .");
                                                 System.Threading.Thread.Sleep(1000);

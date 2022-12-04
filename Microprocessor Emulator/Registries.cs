@@ -8,15 +8,16 @@ namespace Microprocessor_Emulator
 {
     public static class Registries
     {
-        public static int AxValue { get; set; }
-        public static int BxValue { get; set; }
-        public static int DxValue { get; set; }
-        public static int CxValue { get; set; }
+        //display
+        public static string? AxValue = 0.ToString();
+        public static string? BxValue = 0.ToString();
+        public static string? DxValue = 0.ToString();
+        public static string? CxValue = 0.ToString();
 
-        public static string AxValueStr { get; set; }
-        public static string BxValueStr { get; set; }
-        public static string DxValueStr { get; set; }
-        public static string CxValueStr { get; set; }
-
+        //auxiliary
+        public static int AxToAddAndSub=0;
+        public static int BxToAddAndSub=0;
+        public static int CxToAddAndSub=0;
+        public static int DxToAddAndSub=0;
     }
 }
