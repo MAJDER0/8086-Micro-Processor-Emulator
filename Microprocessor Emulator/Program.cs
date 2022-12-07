@@ -14,8 +14,7 @@ namespace Microprocessor_Emualtor
 
                 while (true) {
 
-                    int selected;
-                    int.TryParse(Console.ReadLine(), out selected);
+                    int.TryParse(Console.ReadLine(), out int selected);
                 
                     switch(selected)
                         {
