@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,11 +21,9 @@ namespace Microprocessor_Emulator
 
                 Console.WriteLine("(1) Add one registry value to another registry\n");
                 Console.WriteLine("(2) Add number or string to choosen registry\n");
-                Console.WriteLine("() Any key to return\n");
+                Console.WriteLine("\n() Any key to return\n");
 
-                int TriggerAction;
-
-                int.TryParse(Console.ReadLine(), out TriggerAction);
+                int.TryParse(Console.ReadLine(), out int TriggerAction);
 
                 if (TriggerAction == 1)
                 {
@@ -37,1504 +36,44 @@ namespace Microprocessor_Emulator
                     Console.WriteLine("(3) CX\n");
                     Console.WriteLine("(4) DX\n");
 
-                    int ChoosenRegistry;
-                    int.TryParse(Console.ReadLine(), out ChoosenRegistry);
-
-                    if (ChoosenRegistry == 1)
+                    int.TryParse(Console.ReadLine(), out int ChoosenRegistry);
+                    switch (ChoosenRegistry)
                     {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("You have choosen AX registry.Select registry you wanna add AX to: \n");
-                        Console.ResetColor();
-
-                        Console.WriteLine("(1) BX\n");
-                        Console.WriteLine("(2) CX\n");
-                        Console.WriteLine("(3) DX\n");
-
-                        int.TryParse(Console.ReadLine(), out int SelectedRegistryToAdd);
-
-                        if (SelectedRegistryToAdd == 1)
-                        {
-
-                            if (Registries.AxToAddAndSub != 0 && Registries.BxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.AxToAddAndSub + Registries.BxToAddAndSub)))
-                                {
-                                    Registries.BxValue = DecToHex.DecimalToHexadecimal((Registries.AxToAddAndSub + Registries.BxToAddAndSub));
-                                    Registries.BxToAddAndSub += Registries.AxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.AxToAddAndSub == 0 && Registries.BxToAddAndSub == 0 && Registries.AxValueStringOnly != 0.ToString() && Registries.BxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValueStringOnly + Registries.BxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.BxValue = AddedValues;
-                                    Registries.BxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.AxToAddAndSub == 0 && Registries.BxToAddAndSub == 0 && Registries.AxValueStringOnly == 0.ToString() && Registries.BxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.BxValue + Registries.AxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-                                    Registries.BxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 2)
-                        {
-                            if (Registries.AxToAddAndSub != 0 && Registries.CxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.AxToAddAndSub + Registries.CxToAddAndSub)))
-                                {
-                                    Registries.CxValue = DecToHex.DecimalToHexadecimal((Registries.AxToAddAndSub + Registries.CxToAddAndSub));
-                                    Registries.CxToAddAndSub += Registries.AxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.AxToAddAndSub == 0 && Registries.CxToAddAndSub == 0 && Registries.AxValueStringOnly != 0.ToString() && Registries.CxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValueStringOnly + Registries.CxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-                                    Registries.CxValue = AddedValues;
-                                    Registries.CxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.AxToAddAndSub == 0 && Registries.CxToAddAndSub == 0 && Registries.AxValueStringOnly == 0.ToString() && Registries.CxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.CxValue + Registries.AxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-                                    Registries.CxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 3)
-                        {
-
-                            if (Registries.AxToAddAndSub != 0 && Registries.DxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.AxToAddAndSub + Registries.DxToAddAndSub)))
-                                {
-                                    Registries.DxValue = DecToHex.DecimalToHexadecimal((Registries.AxToAddAndSub + Registries.DxToAddAndSub));
-                                    Registries.DxToAddAndSub += Registries.AxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-                            if (Registries.AxToAddAndSub == 0 && Registries.DxToAddAndSub == 0 && Registries.AxValueStringOnly != 0.ToString() && Registries.DxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValueStringOnly + Registries.DxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.DxValue = AddedValues;
-                                    Registries.DxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.AxToAddAndSub == 0 && Registries.DxToAddAndSub == 0 && Registries.AxValueStringOnly == 0.ToString() && Registries.DxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValue + Registries.AxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.DxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! AX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-
-                    }
-
-                    if (ChoosenRegistry == 2)
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("You have choosen BX registry.Select registry you wanna add BX to: \n");
-                        Console.ResetColor();
-
-                        Console.WriteLine("(1) AX\n");
-                        Console.WriteLine("(2) CX\n");
-                        Console.WriteLine("(3) DX\n");
-
-                        int.TryParse(Console.ReadLine(), out int SelectedRegistryToAdd);
-
-                        if (SelectedRegistryToAdd == 1)
-                        {
-                            if (Registries.BxToAddAndSub != 0 && Registries.AxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.BxToAddAndSub + Registries.AxToAddAndSub)))
-                                {
-                                    Registries.AxValue = DecToHex.DecimalToHexadecimal((Registries.BxToAddAndSub + Registries.AxToAddAndSub));
-                                    Registries.AxToAddAndSub += Registries.BxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.BxToAddAndSub == 0 && Registries.AxToAddAndSub == 0 && Registries.BxValueStringOnly != 0.ToString() && Registries.AxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValueStringOnly + Registries.BxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-                                    Registries.BxValue = AddedValues;
-                                    Registries.BxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.BxToAddAndSub == 0 && Registries.AxToAddAndSub == 0 && Registries.BxValueStringOnly == 0.ToString() && Registries.AxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValue + Registries.BxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.AxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 2)
-                        {
-
-                            if (Registries.BxToAddAndSub != 0 && Registries.CxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.BxToAddAndSub + Registries.CxToAddAndSub)))
-                                {
-                                    Registries.CxValue = DecToHex.DecimalToHexadecimal((Registries.BxToAddAndSub + Registries.CxToAddAndSub));
-                                    Registries.CxToAddAndSub += Registries.BxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.BxToAddAndSub == 0 && Registries.CxToAddAndSub == 0 && Registries.BxValueStringOnly != 0.ToString() && Registries.CxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.BxValueStringOnly + Registries.CxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.CxValue = AddedValues;
-                                    Registries.CxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.BxToAddAndSub == 0 && Registries.CxToAddAndSub == 0 && Registries.BxValueStringOnly == 0.ToString() && Registries.CxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.CxValue + Registries.BxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-                                    Registries.CxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 3)
-                        {
-
-                            if (Registries.BxToAddAndSub != 0 && Registries.DxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.BxToAddAndSub + Registries.DxToAddAndSub)))
-                                {
-                                    Registries.DxValue = DecToHex.DecimalToHexadecimal((Registries.BxToAddAndSub + Registries.DxToAddAndSub));
-                                    Registries.DxToAddAndSub += Registries.BxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.BxToAddAndSub == 0 && Registries.DxToAddAndSub == 0 && Registries.BxValueStringOnly != 0.ToString() && Registries.DxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.BxValueStringOnly + Registries.DxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.DxValue = AddedValues;
-                                    Registries.DxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.BxToAddAndSub == 0 && Registries.DxToAddAndSub == 0 && Registries.BxValueStringOnly == 0.ToString() && Registries.DxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValue + Registries.BxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.DxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! BX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-
-                    }
-
-                    if (ChoosenRegistry == 3)
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("You have choosen CX registry.Select registry you wanna add CX to: \n");
-                        Console.ResetColor();
-
-                        Console.WriteLine("(1) AX\n");
-                        Console.WriteLine("(2) BX\n");
-                        Console.WriteLine("(3) DX\n");
-
-                        int.TryParse(Console.ReadLine(), out int SelectedRegistryToAdd);
-
-                        if (SelectedRegistryToAdd == 1)
-                        {
-
-                            if (Registries.CxToAddAndSub != 0 && Registries.AxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.CxToAddAndSub + Registries.AxToAddAndSub)))
-                                {
-                                    Registries.AxValue = DecToHex.DecimalToHexadecimal((Registries.CxToAddAndSub + Registries.AxToAddAndSub));
-                                    Registries.AxToAddAndSub += Registries.CxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.CxToAddAndSub == 0 && Registries.AxToAddAndSub == 0 && Registries.CxValueStringOnly != 0.ToString() && Registries.AxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.CxValueStringOnly + Registries.AxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.AxValue = AddedValues;
-                                    Registries.AxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.CxToAddAndSub == 0 && Registries.AxToAddAndSub == 0 && Registries.CxValueStringOnly == 0.ToString() && Registries.AxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValue + Registries.CxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.AxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 2)
-                        {
-
-                            if (Registries.BxToAddAndSub != 0 && Registries.CxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.BxToAddAndSub + Registries.CxToAddAndSub)))
-                                {
-                                    Registries.BxValue = DecToHex.DecimalToHexadecimal((Registries.BxToAddAndSub + Registries.CxToAddAndSub));
-                                    Registries.BxToAddAndSub += Registries.CxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.CxToAddAndSub == 0 && Registries.BxToAddAndSub == 0 && Registries.CxValueStringOnly != 0.ToString() && Registries.BxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.CxValueStringOnly + Registries.BxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.BxValue = AddedValues;
-                                    Registries.BxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.CxToAddAndSub == 0 && Registries.BxToAddAndSub == 0 && Registries.CxValueStringOnly == 0.ToString() && Registries.BxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.CxValue + Registries.BxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.BxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-
-                        if (SelectedRegistryToAdd == 3)
-                        {
-
-                            if (Registries.CxToAddAndSub != 0 && Registries.DxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.CxToAddAndSub + Registries.DxToAddAndSub)))
-                                {
-                                    Registries.DxValue = DecToHex.DecimalToHexadecimal((Registries.CxToAddAndSub + Registries.DxToAddAndSub));
-                                    Registries.DxToAddAndSub += Registries.CxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.CxToAddAndSub == 0 && Registries.DxToAddAndSub == 0 && Registries.CxValueStringOnly != 0.ToString() && Registries.DxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.CxValueStringOnly + Registries.DxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.DxValue = AddedValues;
-                                    Registries.DxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.CxToAddAndSub == 0 && Registries.DxToAddAndSub == 0 && Registries.CxValueStringOnly == 0.ToString() && Registries.DxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen DX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValue + Registries.CxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.DxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! CX registry value has been successfully added to DX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-
-                    }
-
-                    if (ChoosenRegistry == 4)
-                    {
-                        Console.Clear();
-                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                        Console.WriteLine("You have choosen DX registry.Select registry you wanna add DX to: \n");
-                        Console.ResetColor();
-
-                        Console.WriteLine("(1) AX\n");
-                        Console.WriteLine("(2) BX\n");
-                        Console.WriteLine("(3) CX\n");
-
-                        int.TryParse(Console.ReadLine(), out int SelectedRegistryToAdd);
-
-                        if (SelectedRegistryToAdd == 1)
-                        {
-
-                            if (Registries.DxToAddAndSub != 0 && Registries.AxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.DxToAddAndSub + Registries.AxToAddAndSub)))
-                                {
-                                    Registries.AxValue = DecToHex.DecimalToHexadecimal((Registries.DxToAddAndSub + Registries.AxToAddAndSub));
-                                    Registries.AxToAddAndSub += Registries.DxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.DxToAddAndSub == 0 && Registries.AxToAddAndSub == 0 && Registries.DxValueStringOnly != 0.ToString() && Registries.AxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValueStringOnly + Registries.AxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.AxValue = AddedValues;
-                                    Registries.AxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.DxToAddAndSub == 0 && Registries.AxToAddAndSub == 0 && Registries.DxValueStringOnly == 0.ToString() && Registries.AxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen AX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.AxValue + Registries.DxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.AxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to AX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 2)
-                        {
-
-                            if (Registries.BxToAddAndSub != 0 && Registries.DxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.BxToAddAndSub + Registries.DxToAddAndSub)))
-                                {
-                                    Registries.BxValue = DecToHex.DecimalToHexadecimal((Registries.BxToAddAndSub + Registries.DxToAddAndSub));
-                                    Registries.BxToAddAndSub += Registries.DxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-
-                            if (Registries.DxToAddAndSub == 0 && Registries.BxToAddAndSub == 0 && Registries.DxValueStringOnly != 0.ToString() && Registries.BxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValueStringOnly + Registries.BxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.BxValue = AddedValues;
-                                    Registries.BxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.DxToAddAndSub == 0 && Registries.BxToAddAndSub == 0 && Registries.DxValueStringOnly == 0.ToString() && Registries.BxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen BX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValue + Registries.BxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.BxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to BX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-
-                        if (SelectedRegistryToAdd == 3)
-                        {
-
-                            if (Registries.CxToAddAndSub != 0 && Registries.DxToAddAndSub != 0)
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("\nYou have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-
-                                if (Enumerable.Range(-32767, 65535).Contains((Registries.CxToAddAndSub + Registries.DxToAddAndSub)))
-                                {
-                                    Registries.CxValue = DecToHex.DecimalToHexadecimal((Registries.CxToAddAndSub + Registries.DxToAddAndSub));
-                                    Registries.CxToAddAndSub += Registries.DxToAddAndSub;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.DxToAddAndSub == 0 && Registries.CxToAddAndSub == 0 && Registries.DxValueStringOnly != 0.ToString() && Registries.CxValueStringOnly != 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValueStringOnly + Registries.CxValueStringOnly;
-
-                                int counter = 0;
-
-                                foreach (var item in AddedValues)
-                                {
-                                    counter++;
-                                }
-
-                                if (counter < 16)
-                                {
-
-                                    Registries.CxValue = AddedValues;
-                                    Registries.CxValueStringOnly = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (Registries.DxToAddAndSub == 0 && Registries.CxToAddAndSub == 0 && Registries.DxValueStringOnly == 0.ToString() && Registries.CxValueStringOnly == 0.ToString())
-                            {
-                                Console.Clear();
-                                Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                Console.WriteLine("You have choosen CX Registry, adding process is about to begin");
-                                Console.ResetColor();
-
-                                string AddedValues = Registries.DxValue + Registries.CxValue;
-
-                                bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                if (isResultSixteenBits)
-                                {
-
-                                    Registries.CxValue = AddedValues;
-
-                                    PleaseWait.Wait();
-
-                                    Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                    Console.WriteLine("\nSuccess! DX registry value has been successfully added to CX registry value. Press any key to return.");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    Program.Main();
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            else
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                Console.ResetColor();
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ADD();
+                        case 1:
+                            ChoosenFirstRegistry(ref Registries.AxValue, ref Registries.AxToAddAndSub, ref Registries.AxValueStringOnly, "AX",
+                              ref Registries.BxValue, ref Registries.BxToAddAndSub, ref Registries.BxValueStringOnly, "BX",
+                                 ref Registries.CxValue, ref Registries.CxToAddAndSub, ref Registries.CxValueStringOnly, "CX",
+                                     ref Registries.DxValue, ref Registries.DxToAddAndSub, ref Registries.DxValueStringOnly, "DX");
+                            break;
+
+                        case 2:
+                            ChoosenFirstRegistry(ref Registries.BxValue, ref Registries.BxToAddAndSub, ref Registries.BxValueStringOnly, "BX",
+                              ref Registries.AxValue, ref Registries.AxToAddAndSub, ref Registries.AxValueStringOnly, "AX",
+                                 ref Registries.CxValue, ref Registries.CxToAddAndSub, ref Registries.CxValueStringOnly, "CX",
+                                     ref Registries.DxValue, ref Registries.DxToAddAndSub, ref Registries.DxValueStringOnly, "DX");
+                            break;
+
+                        case 3:
+                            ChoosenFirstRegistry(ref Registries.CxValue, ref Registries.CxToAddAndSub, ref Registries.CxValueStringOnly, "CX",
+                              ref Registries.AxValue, ref Registries.AxToAddAndSub, ref Registries.AxValueStringOnly, "AX",
+                                ref Registries.BxValue, ref Registries.BxToAddAndSub, ref Registries.BxValueStringOnly, "BX",
+                                    ref Registries.DxValue, ref Registries.DxToAddAndSub, ref Registries.DxValueStringOnly, "DX");
+                            break;
+
+                        case 4:
+                            ChoosenFirstRegistry(ref Registries.DxValue, ref Registries.DxToAddAndSub, ref Registries.DxValueStringOnly, "DX",
+                              ref Registries.AxValue, ref Registries.AxToAddAndSub, ref Registries.AxValueStringOnly, "AX",
+                                 ref Registries.BxValue, ref Registries.BxToAddAndSub, ref Registries.BxValueStringOnly, "BX",
+                                     ref Registries.CxValue, ref Registries.CxToAddAndSub, ref Registries.CxValueStringOnly, "CX");
+                            break;
+
+                        default:
+                            break;
                     }
                 }
 
-                //=-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                //=-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                //=-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-                //=-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-
                 if (TriggerAction == 2)
                 {
-
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
                     Console.WriteLine("Select registry you wanna add value to: \n");
@@ -1546,651 +85,411 @@ namespace Microprocessor_Emulator
 
                     while (true)
                     {
-                        int ChoosenRegistry;
-                        int.TryParse(Console.ReadLine(), out ChoosenRegistry);
+                        int.TryParse(Console.ReadLine(), out int ChoosenRegistry);
 
-                        if (ChoosenRegistry == 1)
+                        switch (ChoosenRegistry)
                         {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                            Console.WriteLine("You have choosen AX registry. Please enter number or word you wanna add to AX: \n");
-                            Console.ResetColor();
 
-                            string Value = Console.ReadLine();
-                            bool isNumber = int.TryParse(Value, out int EnteredValue);
+                            case 1:
+                                ChoosenRegistryToAddValue(ref Registries.AxValue, ref Registries.AxToAddAndSub, ref Registries.AxValueStringOnly, "AX");
+                                break;
 
-                            if (isNumber)
-                            {
-                                bool isAxRegistryNumber = true;
+                            case 2:
+                                ChoosenRegistryToAddValue(ref Registries.BxValue, ref Registries.BxToAddAndSub, ref Registries.BxValueStringOnly, "BX");
+                                break;
 
-                                if (Registries.AxValue == 0.ToString())
-                                    isAxRegistryNumber = int.TryParse(Registries.AxValue, out int variable);
+                            case 3:
+                                ChoosenRegistryToAddValue(ref Registries.CxValue, ref Registries.CxToAddAndSub, ref Registries.CxValueStringOnly, "CX");
+                                break;
 
-                                if (Registries.AxValue != 0.ToString() && Registries.AxToAddAndSub == 0)
-                                {
-                                    isAxRegistryNumber = false;
-                                }
-                                if (isAxRegistryNumber)
-                                {
-                                    Console.Clear();
-                                    if (Enumerable.Range(-32767, 65535).Contains((Registries.AxToAddAndSub + EnteredValue)))
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
+                            case 4:
+                                ChoosenRegistryToAddValue(ref Registries.DxValue, ref Registries.DxToAddAndSub, ref Registries.DxValueStringOnly, "DX");
+                                break;
 
-                                        Registries.AxValue = DecToHex.DecimalToHexadecimal((Registries.AxToAddAndSub + EnteredValue));
-                                        Registries.AxToAddAndSub += EnteredValue;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to AX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (!isNumber)
-                            {
-
-                                bool isAxRegistryNumber = false;
-
-                                if (Registries.AxToAddAndSub != 0)
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-                                if (Registries.AxValue == 0.ToString())
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-
-                                if (!isAxRegistryNumber && Registries.AxValue != 0.ToString() && Registries.AxValueStringOnly==0.ToString())
-                                {
-
-                                    string AddedValues = Registries.AxValue + TextToHex.AsciiToHex(Value);
-
-                                    bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                    if (isResultSixteenBits)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.AxValue = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to AX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-
-                                if (!isAxRegistryNumber && Registries.AxValue != 0.ToString() && Registries.AxValueStringOnly!=0.ToString())
-                                {
-
-                                    string AddedValues = Registries.AxValue + Value;
-
-                                    int counter = 0;
-
-                                    foreach (var item in AddedValues)
-                                    {
-                                        counter++;
-                                    }
-
-                                    if (counter<16)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.AxValue = AddedValues;
-                                        Registries.AxValueStringOnly = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to AX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
+                            default:
+                                break;
                         }
-
-                        if (ChoosenRegistry == 2)
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                            Console.WriteLine("You have choosen BX registry. Please enter number or word you wanna add to BX: \n");
-                            Console.ResetColor();
-
-                            string Value = Console.ReadLine();
-                            bool isNumber = int.TryParse(Value, out int EnteredValue);
-
-                            if (isNumber)
-                            {
-                                bool isAxRegistryNumber = true;
-
-                                if (Registries.BxValue == 0.ToString())
-                                    isAxRegistryNumber = int.TryParse(Registries.BxValue, out int variable);
-
-                                if (Registries.BxValue != 0.ToString() && Registries.BxToAddAndSub == 0)
-                                {
-                                    isAxRegistryNumber = false;
-                                }
-                                if (isAxRegistryNumber)
-                                {
-                                    Console.Clear();
-                                    if (Enumerable.Range(-32767, 65535).Contains((Registries.BxToAddAndSub + EnteredValue)))
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.BxValue = DecToHex.DecimalToHexadecimal((Registries.BxToAddAndSub + EnteredValue));
-                                        Registries.BxToAddAndSub += EnteredValue;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to BX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (!isNumber)
-                            {
-
-                                bool isAxRegistryNumber = false;
-
-                                if (Registries.BxToAddAndSub != 0)
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-                                if (Registries.BxValue == 0.ToString())
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-
-                                if (!isAxRegistryNumber && Registries.BxValue != 0.ToString() && Registries.BxValueStringOnly==0.ToString())
-                                {
-
-                                    string AddedValues = Registries.BxValue + TextToHex.AsciiToHex(Value);
-
-                                    bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                    if (isResultSixteenBits)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.BxValue = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to BX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-
-                                if (!isAxRegistryNumber && Registries.BxValue != 0.ToString() && Registries.BxValueStringOnly != 0.ToString())
-                                {
-
-                                    string AddedValues = Registries.BxValue + Value;
-
-                                    int counter = 0;
-
-                                    foreach (var item in AddedValues)
-                                    {
-                                        counter++;
-                                    }
-
-                                    if (counter < 16)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.BxValue = AddedValues;
-                                        Registries.BxValueStringOnly = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to BX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (ChoosenRegistry == 3)
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                            Console.WriteLine("You have choosen CX registry. Please enter number or word you wanna add to CX: \n");
-                            Console.ResetColor();
-
-                            string Value = Console.ReadLine();
-                            bool isNumber = int.TryParse(Value, out int EnteredValue);
-
-                            if (isNumber)
-                            {
-                                bool isAxRegistryNumber = true;
-
-                                if (Registries.CxValue == 0.ToString())
-                                    isAxRegistryNumber = int.TryParse(Registries.CxValue, out int variable);
-
-                                if (Registries.CxValue != 0.ToString() && Registries.CxToAddAndSub == 0)
-                                {
-                                    isAxRegistryNumber = false;
-                                }
-                                if (isAxRegistryNumber)
-                                {
-                                    Console.Clear();
-                                    if (Enumerable.Range(-32767, 65535).Contains((Registries.CxToAddAndSub + EnteredValue)))
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.CxValue = DecToHex.DecimalToHexadecimal((Registries.CxToAddAndSub + EnteredValue));
-                                        Registries.CxToAddAndSub += EnteredValue;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to CX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (!isNumber)
-                            {
-
-                                bool isAxRegistryNumber = false;
-
-                                if (Registries.CxToAddAndSub != 0)
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-                                if (Registries.CxValue == 0.ToString())
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-
-                                if (!isAxRegistryNumber && Registries.CxValue != 0.ToString() && Registries.CxValueStringOnly==0.ToString())
-                                {
-
-                                    string AddedValues = Registries.CxValue + TextToHex.AsciiToHex(Value);
-
-                                    bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                    if (isResultSixteenBits)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.CxValue = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to CX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-
-                                if (!isAxRegistryNumber && Registries.CxValue != 0.ToString() && Registries.CxValueStringOnly != 0.ToString())
-                                {
-
-                                    string AddedValues = Registries.CxValue + Value;
-
-                                    int counter = 0;
-
-                                    foreach (var item in AddedValues)
-                                    {
-                                        counter++;
-                                    }
-
-                                    if (counter < 16)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.CxValue = AddedValues;
-                                        Registries.CxValueStringOnly = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to CX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                               
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-                        }
-
-                        if (ChoosenRegistry == 4)
-                        {
-                            Console.Clear();
-                            Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                            Console.WriteLine("You have choosen DX registry. Please enter number or word you wanna add to DX: \n");
-                            Console.ResetColor();
-
-                            string Value = Console.ReadLine();
-                            bool isNumber = int.TryParse(Value, out int EnteredValue);
-
-                            if (isNumber)
-                            {
-                                bool isAxRegistryNumber = true;
-
-                                if (Registries.DxValue == 0.ToString())
-                                    isAxRegistryNumber = int.TryParse(Registries.DxValue, out int variable);
-
-                                if (Registries.DxValue != 0.ToString() && Registries.DxToAddAndSub == 0)
-                                {
-                                    isAxRegistryNumber = false;
-                                }
-                                if (isAxRegistryNumber)
-                                {
-                                    Console.Clear();
-                                    if (Enumerable.Range(-32767, 65535).Contains((Registries.DxToAddAndSub + EnteredValue)))
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.DxValue = DecToHex.DecimalToHexadecimal((Registries.DxToAddAndSub + EnteredValue));
-                                        Registries.DxToAddAndSub += EnteredValue;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to DX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-
-                            if (!isNumber)
-                            {
-
-                                bool isAxRegistryNumber = false;
-
-                                if (Registries.DxToAddAndSub != 0)
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-                                if (Registries.DxValue == 0.ToString())
-                                {
-                                    isAxRegistryNumber = true;
-                                }
-
-                                if (!isAxRegistryNumber && Registries.DxValue != 0.ToString() && Registries.DxValueStringOnly==0.ToString())
-                                {
-
-                                    string AddedValues = Registries.DxValue + TextToHex.AsciiToHex(Value);
-
-                                    bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
-
-                                    if (isResultSixteenBits)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.DxValue = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to DX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-
-                                if (!isAxRegistryNumber && Registries.DxValue != 0.ToString() && Registries.DxValueStringOnly != 0.ToString())
-                                {
-
-                                    string AddedValues = Registries.DxValue + Value;
-
-                                    int counter = 0;
-
-                                    foreach (var item in AddedValues)
-                                    {
-                                        counter++;
-                                    }
-
-                                    if (counter < 16)
-                                    {
-                                        Console.Clear();
-                                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                                        Console.WriteLine("Adding process is about to begin");
-                                        Console.ResetColor();
-
-                                        Registries.DxValue = AddedValues;
-                                        Registries.DxValueStringOnly = AddedValues;
-
-                                        PleaseWait.Wait();
-
-                                        Console.ForegroundColor = ConsoleColor.DarkGreen;
-                                        Console.WriteLine("\nSuccess! Entered value has been successfully added to DX registry. Press any key to return.");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        Program.Main();
-                                    }
-                                    else
-                                    {
-                                        Console.ForegroundColor = ConsoleColor.DarkRed;
-                                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
-                                        Console.ResetColor();
-                                        Console.ReadLine();
-                                        break;
-                                    }
-                                }
-                                else
-                                {
-                                    Console.ForegroundColor = ConsoleColor.DarkRed;
-                                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bit of informations (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
-                                    Console.ResetColor();
-                                    Console.ReadLine();
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            break;
-                        }
+                        break;
+                    }
+                }
+
+                else
+                {
+                    Program.Main();
+                }
+            }
+        }
+
+        //Method that triggers further actions for choosen registry. SelectedRegistry is registry you've choosen. Second, Third and Fourth are the next ones
+        //in alphabetical order. For Example if Choosen Registry is Bx, Bx registry is "Selected Registry" And then SecondRegistry is AX, ThirdRegistry is CX
+        //and so on. In First, user chooses registry that Its value gonna be added to next selected one. Constructors of the following methods are based on those constructors bellow.
+
+        public static void ChoosenFirstRegistry(ref string SelectedRegistry, ref int FirstRegistryAuxiliaryInt, ref string FirstRegistryAuxiliaryString, string FirstRegistryNameToMessages,
+            ref string SecondRegistry, ref int SecondRegistryAuxiliaryInt, ref string SecondRegistryAuxiliaryString, string SecondRegistryNameToMessages,
+            ref string ThirdRegistry, ref int ThirdRegistryAuxiliaryInt, ref string ThirdRegistryAuxiliaryString, string ThirdRegistryNameToMessages,
+            ref string FourthRegistry, ref int FourthRegistryAuxiliaryInt, ref string FourthRegistryAuxiliaryString, string FourthRegistryNameToMessages)
+        {
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"You have choosen {FirstRegistryNameToMessages} registry.Select registry you wanna add {FirstRegistryNameToMessages} to: \n");
+            Console.ResetColor();
+
+            Console.WriteLine($"(1) {SecondRegistryNameToMessages}\n");
+            Console.WriteLine($"(2) {ThirdRegistryNameToMessages}\n");
+            Console.WriteLine($"(3) {FourthRegistryNameToMessages}\n");
+
+            int.TryParse(Console.ReadLine(), out int SelectedRegistryToAdd);
+
+            switch (SelectedRegistryToAdd)
+            {
+                case 1:
+                    SelectedRegistryAddition(SelectedRegistry, FirstRegistryAuxiliaryInt, FirstRegistryAuxiliaryString, FirstRegistryNameToMessages,
+                        ref SecondRegistry, ref SecondRegistryAuxiliaryInt, ref SecondRegistryAuxiliaryString, SecondRegistryNameToMessages);
+                    break;
+
+                case 2:
+                    SelectedRegistryAddition(SelectedRegistry, FirstRegistryAuxiliaryInt, FirstRegistryAuxiliaryString, FirstRegistryNameToMessages,
+                        ref ThirdRegistry, ref ThirdRegistryAuxiliaryInt, ref ThirdRegistryAuxiliaryString, ThirdRegistryNameToMessages);
+                    break;
+
+                case 3:
+                    SelectedRegistryAddition(SelectedRegistry, FirstRegistryAuxiliaryInt, FirstRegistryAuxiliaryString, FirstRegistryNameToMessages,
+                        ref FourthRegistry, ref FourthRegistryAuxiliaryInt, ref FourthRegistryAuxiliaryString, FourthRegistryNameToMessages);
+                    break;
+
+            }
+
+        }
+
+        //Method checks if the first and second choosen registry stores number, string or string stores as bits of information.
+        //When First and Second registry dont store the same type of value, error to be displayed. Please check out Registries class
+        //if you want to make given below if statements more clear
+
+        public static void SelectedRegistryAddition(string RegistryYouChoosenToAdd, int FirstIntAuxiliaryValue, string FirstStringAuxiliaryValue, string DisplayingFirstsName,
+            ref string SelectedRegistryToAdd, ref int SecondIntAuxiliaryValue, ref string SecondStringAuxiliaryValue, string DisplayingSecondsName)
+        {
+            //When First and Second Registry are both number do if
+            if (FirstIntAuxiliaryValue != 0 && SecondIntAuxiliaryValue != 0)
+            {
+                EnumerableRange(RegistryYouChoosenToAdd, FirstIntAuxiliaryValue, DisplayingFirstsName,
+                    ref SelectedRegistryToAdd, ref SecondIntAuxiliaryValue, DisplayingSecondsName);
+            }
+
+            //When both registries dont store either number or string stored as bits of information, it means that both registries store string
+            //So basically: when both registries are strings
+            if (FirstIntAuxiliaryValue == 0 && SecondIntAuxiliaryValue == 0 && FirstStringAuxiliaryValue != 0.ToString() && SecondStringAuxiliaryValue != 0.ToString())
+            {
+                AddNormalStrings(RegistryYouChoosenToAdd, FirstStringAuxiliaryValue, DisplayingFirstsName,
+                    ref SelectedRegistryToAdd, ref SecondStringAuxiliaryValue, DisplayingSecondsName);
+            }
+
+            //When both registries store strings stored as bits of information
+            if (FirstIntAuxiliaryValue == 0 && SecondIntAuxiliaryValue == 0 && FirstStringAuxiliaryValue == 0.ToString() && SecondStringAuxiliaryValue == 0.ToString())
+            {
+                StringsAsBitOfInformationsAddition(RegistryYouChoosenToAdd, DisplayingFirstsName,
+                    ref SelectedRegistryToAdd, DisplayingSecondsName);
+            }
+
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("\nYou can't add string-to-number, number-to-string or string stored as bits of information (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
+                Console.ResetColor();
+                Console.ReadLine();
+                ADD();
+            }
+        }
+
+        //Addition of regs numeric values. 
+
+        public static void EnumerableRange(string NameOfFirstRegAndDisplayingItOnDashBoard, int FirstRegValue, string FirstRegistryStringToDisplayMessages,
+            ref string NameOfSecondRegAndDisplayingItOnDashBoard, ref int SecondRegValue, string SecondRegistryStringToDisplayMessages)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"\nYou have choosen {SecondRegistryStringToDisplayMessages} Registry, adding process is about to begin");
+            Console.ResetColor();
+
+            if (Enumerable.Range(-32767, 65535).Contains((FirstRegValue + SecondRegValue)))
+            {
+
+                NameOfSecondRegAndDisplayingItOnDashBoard = DecToHex.DecimalToHexadecimal((FirstRegValue + SecondRegValue));
+                SecondRegValue += FirstRegValue;
+
+                PleaseWait.Wait();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"\nSuccess! {FirstRegistryStringToDisplayMessages} registry value has been successfully added to {SecondRegistryStringToDisplayMessages} registry value. Press any key to return.");
+                Console.ResetColor();
+                Console.ReadLine();
+                Program.Main();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
+                Console.ResetColor();
+                Console.ReadLine();
+                ADD();
+            }
+        }
+
+        // Normal Strings Addition 
+
+        public static void AddNormalStrings(string NameOfFirstRegAndDisplayingItOnDashBoard, string FirstGivenString, string FirstRegistryStringToDisplayMessages,
+            ref string NameOfSecondRegAndDisplayingItOnDashBoard, ref string SecondGivenString, string SecondRegistryStringToDisplayMessages)
+        {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"You have choosen {SecondRegistryStringToDisplayMessages} Registry, adding process is about to begin");
+            Console.ResetColor();
+
+            string AddedValues = SecondGivenString + FirstGivenString;
+
+            int counter = 0;
+
+            foreach (var item in AddedValues)
+            {
+                counter++;
+            }
+
+            if (counter < 16)
+            {
+
+                NameOfSecondRegAndDisplayingItOnDashBoard = AddedValues;
+                SecondGivenString = AddedValues;
+
+                PleaseWait.Wait();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"\nSuccess! {FirstRegistryStringToDisplayMessages} registry value has been successfully added to {SecondRegistryStringToDisplayMessages} registry value. Press any key to return.");
+                Console.ResetColor();
+                Console.ReadLine();
+                Program.Main();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
+                Console.ResetColor();
+                Console.ReadLine();
+                ADD();
+            }
+        }
+
+        //Adding strings stored as bits of information
+
+        public static void StringsAsBitOfInformationsAddition(string NameOfFirstRegAndDisplayingItOnDashBoard, string FirstRegistryStringToDisplayMessages,
+            ref string NameOfSecondRegAndDisplayingItOnDashBoard, string SecondRegistryStringToDisplayMessages)
+        {
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"You have choosen {SecondRegistryStringToDisplayMessages} Registry, adding process is about to begin");
+            Console.ResetColor();
+
+            //Concatenating two hex numbers to check if they're 16-bits
+            string AddedValues = NameOfSecondRegAndDisplayingItOnDashBoard + NameOfFirstRegAndDisplayingItOnDashBoard;
+
+            bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
+
+            if (isResultSixteenBits)
+            {
+                NameOfSecondRegAndDisplayingItOnDashBoard = AddedValues;
+
+                PleaseWait.Wait();
+
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine($"\nSuccess! {FirstRegistryStringToDisplayMessages} registry value has been successfully added to {SecondRegistryStringToDisplayMessages} registry value. Press any key to return.");
+                Console.ResetColor();
+                Console.ReadLine();
+                Program.Main();
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
+                Console.ResetColor();
+                Console.ReadLine();
+                ADD();
+            }
+
+        }
+
+        // Adds Given Value to Choosen Registry
+
+        public static void ChoosenRegistryToAddValue(ref string RegistryToDisplayOnDashBoard, ref int ItsAuxiliaryIntValue, ref string ItsAuxiliaryStringValue, string RegistryStringToDisplayMessages)
+        {
+
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
+            Console.WriteLine($"You have choosen {RegistryStringToDisplayMessages} registry. Please enter number or word you wanna add to {RegistryStringToDisplayMessages}: \n");
+            Console.ResetColor();
+
+            string Value = Console.ReadLine();
+            bool isNumber = int.TryParse(Value, out int EnteredValue);
+
+            if (isNumber)
+            {
+                bool isAxRegistryNumber = true;
+
+                //If the value displayed on dashboard is equal 0,
+                //we want to Parse this value into int, so we can add it with given number  
+                if (RegistryToDisplayOnDashBoard == 0.ToString())
+                    isAxRegistryNumber = int.TryParse(RegistryToDisplayOnDashBoard, out int variable);
+
+                //When there is registry value displayed on dashboard but its Int value is equal 0,
+                //It means that choosen registry doesnt store a number
+                if (RegistryToDisplayOnDashBoard != 0.ToString() && ItsAuxiliaryIntValue == 0)
+                {
+                    isAxRegistryNumber = false;
+                }
+
+                if (isAxRegistryNumber)
+                {
+                    Console.Clear();
+                    if (Enumerable.Range(-32767, 65535).Contains((ItsAuxiliaryIntValue + EnteredValue)))
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine("Adding process is about to begin");
+                        Console.ResetColor();
+
+                        RegistryToDisplayOnDashBoard = DecToHex.DecimalToHexadecimal((ItsAuxiliaryIntValue + EnteredValue));
+                        ItsAuxiliaryIntValue += EnteredValue;
+
+                        PleaseWait.Wait();
+
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"\nSuccess! Entered value has been successfully added to {RegistryStringToDisplayMessages} registry. Press any key to return.");
+                        Console.ResetColor();
+                        Console.ReadLine();
+                        Program.Main();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
+                        Console.ResetColor();
+                        Console.ReadLine();
+                        ADD();
                     }
                 }
                 else
                 {
-                    break;
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bits of information (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
+                    Console.ResetColor();
+                    Console.ReadLine();
+                    ADD();
+                }
+            }
+
+            if (!isNumber)
+            {
+                bool isAxRegistryNumber = false;
+
+                //When Auxiliary Int Value is not equal 0,
+                //it means that registry stores number.            
+                if (ItsAuxiliaryIntValue != 0)
+                {
+                    isAxRegistryNumber = true;
+                }
+
+                //When opened program, Default value is 0,
+                //We consider this situation with if.
+                if (RegistryToDisplayOnDashBoard == 0.ToString())
+                {
+                    isAxRegistryNumber = true;
+                }
+
+                //when choosen registry doesnt store number,doesn't store normal string (ItsAuxiliaryStringValue)
+                //and there's anything to be displayed on dashboard, it means that registry we want to add the value,
+                //stores string stored as bits of information.
+                if (!isAxRegistryNumber && RegistryToDisplayOnDashBoard != 0.ToString() && ItsAuxiliaryStringValue == 0.ToString())
+                {
+
+                    string AddedValues = RegistryToDisplayOnDashBoard + TextToHex.AsciiToHex(Value);
+
+                    //checks if given value after converting to hex + current registry value, will exceed 16-bits
+                    bool isResultSixteenBits = ushort.TryParse(AddedValues, out ushort SixteenBitsResult);
+
+                    if (isResultSixteenBits)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine("Adding process is about to begin");
+                        Console.ResetColor();
+
+                        RegistryToDisplayOnDashBoard = AddedValues;
+
+                        PleaseWait.Wait();
+
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"\nSuccess! Entered value has been successfully added to {RegistryStringToDisplayMessages} registry. Press any key to return.");
+                        Console.ResetColor();
+                        Console.ReadLine();
+                        Program.Main();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
+                        Console.ResetColor();
+                        Console.ReadLine();
+                        ADD();
+                    }
+                }
+
+                //when choosen registry doesnt store number, but ItsAuxiliaryStringValue != 0.ToString(),
+                //It means that registry stores a string.
+                if (!isAxRegistryNumber && RegistryToDisplayOnDashBoard != 0.ToString() && ItsAuxiliaryStringValue != 0.ToString())
+                {
+
+                    string AddedValues = RegistryToDisplayOnDashBoard + Value;
+
+                    int counter = 0;
+
+                    foreach (var item in AddedValues)
+                    {
+                        counter++;
+                    }
+
+                    if (counter < 16)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkMagenta;
+                        Console.WriteLine("Adding process is about to begin");
+                        Console.ResetColor();
+
+                        RegistryToDisplayOnDashBoard = AddedValues;
+                        ItsAuxiliaryStringValue = AddedValues;
+
+                        PleaseWait.Wait();
+
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                        Console.WriteLine($"\nSuccess! Entered value has been successfully added to {RegistryStringToDisplayMessages} registry. Press any key to return.");
+                        Console.ResetColor();
+                        Console.ReadLine();
+                        Program.Main();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nAfter Addition final number will exceed 16 bits. Please press any key to try again!");
+                        Console.ResetColor();
+                        Console.ReadLine();
+                        ADD();
+                    }
+                }
+
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\nYou can't exceed 16 bits and add null, string-to-number, number-to-string or string stored as bits of information (SABOI) to casual string or number. Please add number-to-number, string-to-string or (SABI)string-to-(SABI)string. Press any key to try again");
+                    Console.ResetColor();
+                    Console.ReadLine();
+                    ADD();
                 }
             }
         }

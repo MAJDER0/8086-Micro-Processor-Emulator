@@ -9,7 +9,7 @@ namespace Microprocessor_Emulator
 {
     public class TextToHex
     {
-
+        //Converts Text to Hex values
         public static string AsciiToHex(string asciiString)
         {
             StringBuilder builder = new StringBuilder();

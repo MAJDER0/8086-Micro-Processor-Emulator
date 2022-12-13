@@ -8,9 +8,11 @@ namespace Microprocessor_Emulator
 {
     public class DecToHex
     {
+        //Convers numbers to Hex
         public static string DecimalToHexadecimal(int dec)
         {
-            if (dec < 1) return "0";
+            if (dec < 0)
+                return ("-" + (-dec).ToString("X"));
 
             int hex = dec;
             string hexStr = string.Empty;
