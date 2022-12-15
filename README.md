@@ -24,7 +24,7 @@ Instead, it represents the numerical values 98 and 97, which are the ASCII codes
 
 ## How to Run?
 
-To open and test this project, all you need to do is Open Visual Studio and click Clone a Repository. On the repository location, you paste this: https://github.com/MAJDER0/8086-Micro-Processor-Emulator <br>
+To open and test this project, all you need to do is Open Visual Studio and click Clone a Repository. On the repository location, paste it: <br> https://github.com/MAJDER0/8086-Micro-Processor-Emulator <br>
 and click clone. Once project is there, you can compilate it.
 
 
