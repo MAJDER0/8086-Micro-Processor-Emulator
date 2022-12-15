@@ -87,6 +87,7 @@ namespace Microprocessor_Emulator
                                 Console.ResetColor();
                                 continue;
                         }
+                        break;
                     }
                 }
 

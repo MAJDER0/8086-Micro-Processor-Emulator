@@ -110,6 +110,7 @@ namespace Microprocessor_Emulator
                             default:
                                 break;
                         }
+                        break;
                     }
                 }
 
